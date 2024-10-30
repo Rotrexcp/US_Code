@@ -6,6 +6,7 @@ from repaso_complemento import *
 print("algo")
 
 ##################
+import datetime
 hoy=datetime.datetime.now()
 hoy_con_fecha_completa=datetime.datetime.now().date()
 hoy_solo_dia_del_mes=datetime.datetime.now().date().day
@@ -28,9 +29,20 @@ math.pi     #es el numero pi
 suma= "+"
 resta= "-"
 division= "/"
+division_entera="//"
 multiplicacion= "*"
 resto= "%"
 potencia= "**"
+asignacion="="
+igual="=="
+desigual="!="
+mayor=">"
+menor="<"
+mayor_igual=">="
+menor_igual="<="
+And="and"
+Or="or"
+Not="not"
 
 ###################
 '''estructuras: '''
@@ -59,7 +71,7 @@ def es_compuesto(n:int)->bool:
     for i in range (2,n):
         if es_multiplo(n,i):
             existe=True
-        break
+            break
     return existe
 '''     esquema existe(coleccion de elementos, condicion )
             existe=Falso
@@ -94,7 +106,7 @@ def leer_clima(fichero:str)->list[RegistroClima]:
         for fecha_cadena, lluvia, tmax, tmin in lector:
         #for tupla in lector
         #convertir las cadenas de caracteres en datos con su tipo
-            fecha=datetime.strptime(fecha_cadena,"%Y-%m-%d").date()
+            fecha=datetime.datetime.strptime(fecha_cadena,"%Y-%m-%d").date()
             #si la lectura se hubiera hecho sin desempaquetar
             #aquí pondriamos
             #fecha=datetime.strptime(tupla[0],"%Y-%m-%d").date()
@@ -139,8 +151,8 @@ next(lector)
 min(lista,   key=lambda x: x.temp_min)
 lista[0]
 lista[-1]
-fecha=datetime.strptime(fecha_cadena,"%Y-%m-%d")        #str -> datetime
-fecha_cadena=fecha.strftime("%Y-%m-%d")                 #datetime -> str
+fecha=datetime.datetime.strptime(fecha_cadena,"%Y-%m-%d")        #str -> datetime
+fecha_cadena=fecha.strftime("%Y-%m-%d")                         #datetime -> str
 lista.sort()
 sum(len(lista1))
 letras.isdigit()

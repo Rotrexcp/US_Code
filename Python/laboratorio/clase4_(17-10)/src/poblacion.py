@@ -12,8 +12,6 @@ def lee_poblaciones(population_csv:str)->list[RegistroPoblacion]:
         lector=csv.reader(f)
 
         for pais,codigo,año,censo in lector:
-            pais=str(pais)
-            codigo=str(codigo)
             año=int(año)
             censo=int(censo)
 

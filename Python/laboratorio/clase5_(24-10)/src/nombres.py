@@ -45,7 +45,7 @@ def calcular_nombres(lista_fichero: list[FrecuenciaNombre], genero: str) -> set[
 
     # Extraer los nombres de las tuplas (año, nombre, frecuencia)
     for tupla in filtro:
-        año, nombre, frecuencia = tupla  # Descomponer la tupla explícitamente
+        año, nombre, frecuencia = tupla  # Descomponer la tupla explícitamente      or: _,nombre,_
         conjunto_nombres.add(nombre)     # Solo trabajamos con el nombre
 
     return conjunto_nombres

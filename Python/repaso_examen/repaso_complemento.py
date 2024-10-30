@@ -1,4 +1,4 @@
-from datetime import *
+import datetime
 import math
 from typing import NamedTuple
 import csv

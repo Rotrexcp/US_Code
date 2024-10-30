@@ -19,10 +19,10 @@ def test_calcular_nombres(lista_r):
 
 
 def funcion_principal():
-    lista_r=leer_frecuencias_nombres("./VSCode FP/Python/laboratorio/clase5_(24-10)/data/frecuencias_nombres.csv")
+    lista_r=leer_frecuencias_nombres("./Python/laboratorio/clase5_(24-10)/data/frecuencias_nombres.csv")
     #test_leer_frecuencias_nombres(lista_r)
-    #test_filtrar_por_genero(lista_r)
-    test_calcular_nombres(lista_r)
+    test_filtrar_por_genero(lista_r)
+    #test_calcular_nombres(lista_r)
 
 
 

@@ -142,7 +142,7 @@ def leer_csv(fichero_csv:str)->list[tuple]:
         lector=csv.reader(f)
 
         for matricula,marca,fecha_cadena,kilometraje,precio in lector:
-            fecha = datetime.strptime(fecha_cadena, "%Y-%m-%d")
+            fecha = datetime.datetime.strptime(fecha_cadena, "%Y-%m-%d")
             kilometraje=int(kilometraje)
             precio=float(precio)
 
@@ -152,7 +152,8 @@ def leer_csv(fichero_csv:str)->list[tuple]:
     
     return lista_r
 
-lista_automoviles=leer_csv()
+fichero_csv = "ruta/del/archivo.csv" 
+lista_automoviles=leer_csv(fichero_csv)
 lista_entero=[]
 lista_str=[]
 verificacion_matricula=False
@@ -200,7 +201,7 @@ def marcas_ordenadas_longitud(lista:list[Automovil])->list:
 #   Automovil y un año y devuelva la media de kilómetros de los coches cuya fecha de 
 #   matriculación coincide con el año indicado. Si no hay coches del año indicado, la 
 #   función devuelve None.
-def media_kilometrajes(lista:list[Automovil], año:int)->float:
+def media_kilometrajes(lista:list[Automovil], año:int)->float | None:
     suma_kilometrajes=0
     contador=0
     for vehiculo in lista:
@@ -212,4 +213,3 @@ def media_kilometrajes(lista:list[Automovil], año:int)->float:
             contador=None
     media=suma_kilometrajes/contador
     return media
-
