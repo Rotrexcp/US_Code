@@ -41,6 +41,10 @@ def test_mes_mayor_tempmax_media(lista_r):
     mes=diccionario_tempmax_media_por_mes(lista_r, 1951)
     print(f"el mes con mayor temperatura maxima media es {mes}")
 
+def test_diccionario_dia_mas_frio_por_año(lista_r):
+    dicc=diccionario_dia_mas_frio_por_año(lista_r)
+    print(f"el dia mas frio por año es {dicc}")
+
 
 
 
@@ -57,3 +61,4 @@ if __name__=="__main__":
     #test_diccionario_tempmax_media_por_mes(lista_r)
     #test_diccionario_tempmax_media_por_mes2(lista_r)
     #test_mes_mayor_tempmax_media(lista_r)
+    test_diccionario_dia_mas_frio_por_año(lista_r)

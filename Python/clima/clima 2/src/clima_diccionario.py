@@ -121,3 +121,110 @@ es el mes de ese año con la temperatura máxima media mayor.'''
 def mes_mayor_tempmax_media(lista:list[RegistroClima], año:int)->int:
     dicc_temp_media=diccionario_tempmax_media_por_mes(lista, año)
     return max(dicc_temp_media.items(), key=lambda x:x[1])[0]
+
+
+'''Dado un año devuelva un diccionario que haga corresponder a cada mes de ese año una 
+lista con los RegistrosClima de ese mes.'''
+#Esquema basico diccionario organizador(en este caso por mes)         Tambien se puede dar el caso con conjuntos
+def diccionario_registros_por_mes(lista:list[RegistroClima], año:int)->dict[int, list[RegistroClima]]:
+    dicc=dict()
+    lista_fil=[r for r in lista if r.fecha.year==año]
+    for r in lista_fil:
+        clave=r.fecha.month
+        if clave in dicc:
+            dicc[clave].append(r)
+        else:
+            dicc[clave]=[r]
+    return dicc
+
+
+#Copilot
+def diccionario_registros_por_mes(lista:list[RegistroClima], año:int)->dict[int, list[RegistroClima]]:
+    dicc=dict()
+    for r in lista:
+        if r.fecha.year==año:
+            clave=r.fecha.month
+            if clave in dicc:
+                dicc[clave].append(r)
+            else:
+                dicc[clave]=[r]
+    return dicc
+
+
+'''Dado un año, devuelva un diccionario en el que a cada mes de ese año le haga 
+corresponder el día con más lluvia.'''
+def diccionario_max_lluvia_por_mes(lista:list[RegistroClima], año:int)->dict[int, datetime]:
+    dicc_organizador=diccionario_registros_por_mes(lista, año)
+    dicc=dict()
+    for mes in dicc_organizador:
+        dicc[mes]=max(dicc_organizador[mes], key=lambda x:x.lluvia).fecha
+    return dicc
+#Copilot
+def diccionario_dia_max_lluvia_por_mes_copilot(lista:list[RegistroClima], año:int)->dict[int, list]:
+    dicc=dict()
+    for r in lista:
+        if r.fecha.year==año:
+            clave=r.fecha.month
+            if clave in dicc:
+                if r.lluvia>dicc[clave]:
+                    dicc[clave]=r.lluvia
+            else:
+                dicc[clave]=r.lluvia
+    return dicc
+
+
+'''Devuelve un diccionario en el que las claves sean los años y los valores el día más frio 
+de cada año.'''
+def diccionario_dia_mas_frio_por_año(lista:list[RegistroClima])->dict[int, datetime]:
+    dicc_organizador=dict()
+    for r in lista:
+        clave=r.fecha.year
+        if clave in dicc_organizador:
+            dicc_organizador[clave].append(r)
+        else:
+            dicc_organizador[clave]=[r]
+    dicc=dict()
+    for año in dicc_organizador:
+        dicc[año]=min(dicc_organizador[año], key=lambda x:x.temp_min).fecha
+    return dicc
+#Copilot
+def diccionario_dia_mas_frio_por_año_copilot(lista:list[RegistroClima], año:int)->dict[int, datetime]:
+    dicc=dict()
+    for r in lista:
+        clave=r.fecha.year
+        if clave in dicc:
+            if r.temp_min<dicc[clave].temp_min:
+                dicc[clave]=r
+        else:
+            dicc[clave]=r
+    return dicc
+
+'''Devuelve un diccionario en el que las claves sean los años y los valores el día más frio 
+de cada año y su temperatura.'''
+def diccionario_dia_mas_frio_por_año_temperatura(lista:list[RegistroClima])->dict[int, tuple[datetime, float]]:
+    dicc_organizador=dict()
+    for r in lista:
+        clave=r.fecha.year
+        if clave in dicc_organizador:
+            dicc_organizador[clave].append(r)
+        else:
+            dicc_organizador[clave]=[r]
+    dicc=dict()
+    for año in dicc_organizador:
+        reg_min=min(dicc_organizador[año], key=lambda x:x.temp_min)
+        dicc[año]=(reg_min.fecha, reg_min.temp_min)
+    return dicc
+#Copilot
+def diccionario_dia_mas_frio_por_año_temperatura_copilot(lista:list[RegistroClima])->dict[int, tuple[datetime, float]]:
+    dicc_organizador=dict()
+    for r in lista:
+        clave=r.fecha.year
+        if clave in dicc_organizador:
+            dicc_organizador[clave].append(r)
+        else:
+            dicc_organizador[clave]=[r]
+    dicc=dict()
+    for año in dicc_organizador:
+        r=min(dicc_organizador[año], key=lambda x:x.temp_min)
+        dicc[año]=(r.fecha, r.temp_min)
+    return dicc
