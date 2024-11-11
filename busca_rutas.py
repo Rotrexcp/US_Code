@@ -3,11 +3,12 @@ import os
 def buscar_archivo(nombre_archivo, directorio_base="."):
     for root, _, files in os.walk(directorio_base):
         if nombre_archivo in files:
-            return os.path.abspath(os.path.join(root, nombre_archivo))
+            ruta = os.path.abspath(os.path.join(root, nombre_archivo))
+            return ruta.replace("\\", "/")
     return None
 
 # Ejemplo de uso:
-nombre_archivo = "frecuencias_nombres.csv"  # El nombre del archivo que quieres encontrar
+nombre_archivo = input("dime el nombre del archivo: ")  # El nombre del archivo que quieres encontrar
 ruta = buscar_archivo(nombre_archivo)
 
 if ruta:
