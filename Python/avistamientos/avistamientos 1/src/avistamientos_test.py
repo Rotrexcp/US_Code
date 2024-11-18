@@ -64,6 +64,45 @@ def test_avistamientos_en_radio(lista_r):
     avistamientos_en_radio_resultado = avistamientos_en_radio(lista_r, coordenadas, radio)
     print(f"Los avistamientos en un radio de {radio} km de las coordenadas {coordenadas} son {avistamientos_en_radio_resultado}")
 
+def test_filtra_entre_fechas(lista_r):
+    fecha1 = datetime.datetime(2010, 1, 1).date()
+    fecha2 = datetime.datetime(2010, 1, 2).date()
+    filtrados = filtra_entre_fechas(lista_r, fecha1, fecha2)
+    print(f"Los avistamientos entre las fechas {fecha1} y {fecha2} son:")
+    for a in filtrados:
+        print("\t", a)
+
+def test_contador_por_año(lista_r):
+    contador = contador_por_año(lista_r)
+    print(f"El número de avistamientos por año es:")
+    for año, cantidad in contador.items():
+        print(f"\t{año}: {cantidad}")
+
+def test_contador_por_año_defaultdict(lista_r):
+    contador = contador_por_año_defaultdict(lista_r)
+    print(f"El número de avistamientos por año es:")
+    for año, cantidad in contador.items():
+        print(f"\t{año}: {cantidad}")
+
+def test_contador_por_año_counter(lista_r):
+    contador = contador_por_año_counter(lista_r)
+    print(f"El número de avistamientos por año es:")
+    for año, cantidad in contador.items():
+        print(f"\t{año}: {cantidad}")
+
+def test_año_con_mas_avistamientos(lista_r):
+    año = año_con_mas_avistamientos(lista_r)
+    print(f"El año con más avistamientos es {año}")
+
+def test_año_con_mas_avistamientos_counter(lista_r):
+    año = año_con_mas_avistamientos_counter(lista_r)
+    print(f"El año con más avistamientos es {año}")
+
+def test_año_con_mas_avistamientos_forma_counter(lista_r):
+    año = año_con_mas_avistamientos_forma_counter(lista_r)
+    print(f"El año con más avistamientos es {año}")
+
+
 
 
 if __name__ == "__main__":
@@ -75,4 +114,11 @@ if __name__ == "__main__":
     #test_avistamiento_mayor_duracion(lista_r)
     #test_avistamiento_comentario_mas_largo(lista_r)
     #test_punto_medio(lista_r)
-    test_avistamientos_en_radio(lista_r)
+    #test_avistamientos_en_radio(lista_r)
+    #test_filtra_entre_fechas(lista_r)
+    #test_contador_por_año(lista_r)
+    #test_contador_por_año_defaultdict(lista_r)
+    #test_contador_por_año_counter(lista_r)
+    #test_año_con_mas_avistamientos(lista_r)
+    #test_año_con_mas_avistamientos_counter(lista_r)
+    #test_año_con_mas_avistamientos_forma_counter(lista_r)
