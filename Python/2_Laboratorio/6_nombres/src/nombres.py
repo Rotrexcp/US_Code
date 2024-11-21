@@ -165,3 +165,46 @@ def calcular_año_frecuencia_por_nombre(lista_fichero:list[FrecuenciaNombre], ge
     diccionario=dict()
     for r in lista_fichero:
         clave=r.nombre
+        tupla=(r.año, r.frecuencia)
+        if r.genero == genero:
+            if clave in diccionario:
+                diccionario[clave].append(tupla)
+            else:
+                diccionario[clave]=[tupla]
+    return diccionario
+
+
+def calcular_nombre_mas_frecuente_por_año(lista_fichero:list[FrecuenciaNombre], genero:str)->list[tuple[int,str,int]]:
+    lista_tuplas=[]
+    dict_nombre_frecuencia=calcular_año_frecuencia_por_nombre(lista_fichero=lista_fichero, genero=genero)
+    for nombre in dict_nombre_frecuencia:
+        dict_nombre_frecuencia[nombre].sort(key=lambda x: x[0])
+    for nombre, valores in dict_nombre_frecuencia.items():
+        max_frecuencia=0
+        nombre_mas_frecuente=""
+        año_frecuente=0
+        lista=[]
+        for año, frecuencia in valores:
+            if año_frecuente in lista and frecuencia > max_frecuencia:
+                max_frecuencia=frecuencia
+                nombre_mas_frecuente=nombre
+                lista=[año_frecuente, nombre_mas_frecuente, max_frecuencia]
+            else:
+                año_frecuente=año
+                nombre_mas_frecuente=nombre
+                max_frecuencia=frecuencia
+                lista=[año_frecuente, nombre_mas_frecuente, max_frecuencia]
+
+    '''dict_nombre_frecuencia = calcular_año_frecuencia_por_nombre(lista_fichero, genero)
+    for año in range(min(r.año for r in lista_fichero), max(r.año for r in lista_fichero) + 1):
+        max_frecuencia = 0
+        nombre_mas_frecuente = ""
+        for nombre, frecuencias in dict_nombre_frecuencia.items():
+            for a, f in frecuencias:
+                if a == año and f > max_frecuencia:
+                    max_frecuencia = f
+                    nombre_mas_frecuente = nombre
+        if nombre_mas_frecuente:
+            lista_tuplas.append((año, nombre_mas_frecuente, max_frecuencia))
+    lista_tuplas.sort(key=lambda x: x[0])
+    return lista_tuplas'''

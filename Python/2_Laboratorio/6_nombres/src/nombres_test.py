@@ -50,11 +50,21 @@ def test_calcular_nombres_mas_frecuentes(lista_r):
     lista_nombres_filtrados, numero_nombres_por_n=calcular_nombres_mas_frecuentes(lista_fichero=lista_r, genero=genero_elegido, decada=decada_elegida, n=n_elegido)
     print(f"El top {numero_nombres_por_n} de nombres más frecuentes según el genero {genero_elegido} en la decada de {decada_elegida} es {lista_nombres_filtrados}")
 
+def test_calcular_año_frecuencia_por_nombre(lista_r):
+    genero_elegido="Hombre"
+    diccionario_final=calcular_año_frecuencia_por_nombre(lista_fichero=lista_r, genero=genero_elegido)
+    print(f"El diccionario según el género {genero_elegido} es: {diccionario_final}")
+
+def test_calcular_nombre_mas_frecuente_por_año(lista_r):
+    genero_elegido="Hombre"
+    diccionario_final=calcular_nombre_mas_frecuente_por_año(lista_fichero=lista_r, genero=genero_elegido)
+    print(f"El diccionario según el género {genero_elegido} es: {diccionario_final}")   
+
 
 
 
 def funcion_principal():
-    lista_r=leer_frecuencias_nombres("./Python/laboratorio/clase5_(24-10)/data/frecuencias_nombres.csv")
+    lista_r=leer_frecuencias_nombres("C:/Users/rodri/OneDrive/Desktop/US_proyects/Python/2_Laboratorio/6_nombres/data/frecuencias_nombres.csv")
     #test_leer_frecuencias_nombres(lista_r)
     #test_filtrar_por_genero(lista_r)
     #test_calcular_nombres(lista_r)
@@ -63,7 +73,9 @@ def funcion_principal():
     #test_calcular_nombres_compuestos(lista_r)
     #test_calcular_frecuencia_media_nombre_años(lista_r)
     #test_calcular_año_mas_frecuencia_nombre(lista_r)
-    test_calcular_nombres_mas_frecuentes(lista_r)
+    #test_calcular_nombres_mas_frecuentes(lista_r)
+    #test_calcular_año_frecuencia_por_nombre(lista_r)
+    test_calcular_nombre_mas_frecuente_por_año(lista_r)
 
 
 
