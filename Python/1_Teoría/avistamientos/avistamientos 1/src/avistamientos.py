@@ -263,7 +263,7 @@ los avistamientos, y los valores el porcentaje de avistamientos con dicha forma.
 #   media
 #   porcentaje (parecido a media)
 
-#todos tienen la variante de maximo
+#todos tienen la variante de máximo
 
 def porcentaje_formas(lista_avistamientos:list[Avistamiento])-> dict[str, float]:
     dicc_cont = Counter(avistamiento.forma for avistamiento in lista_avistamientos)

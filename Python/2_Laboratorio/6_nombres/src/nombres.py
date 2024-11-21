@@ -159,3 +159,9 @@ def calcular_nombres_mas_frecuentes(lista_fichero:list[FrecuenciaNombre], genero
         numero_nombres+=1
 
     return lista_nombres, numero_nombres
+
+
+def calcular_año_frecuencia_por_nombre(lista_fichero:list[FrecuenciaNombre], genero:str)->dict[str,tuple[int,int]]:
+    diccionario=dict()
+    for r in lista_fichero:
+        clave=r.nombre
