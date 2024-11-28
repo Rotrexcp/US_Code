@@ -1,4 +1,4 @@
-from avistamientos import *
+from avistamientos1 import *
 import math
 
 def distancia(c1:Coordenadas, c2:Coordenadas)-> float:

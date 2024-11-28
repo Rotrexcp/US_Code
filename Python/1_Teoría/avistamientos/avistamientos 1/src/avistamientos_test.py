@@ -1,5 +1,5 @@
-from avistamientos import *
-from avistamientos import Coordenadas
+from avistamientos1 import *
+from avistamientos1 import Coordenadas
 
 def test_leer_avistamientos(lista_r):
     print(f"se han leido un total de {len(lista_r)} avistamientos")
@@ -72,36 +72,6 @@ def test_filtra_entre_fechas(lista_r):
     for a in filtrados:
         print("\t", a)
 
-def test_contador_por_año(lista_r):
-    contador = contador_por_año(lista_r)
-    print(f"El número de avistamientos por año es:")
-    for año, cantidad in contador.items():
-        print(f"\t{año}: {cantidad}")
-
-def test_contador_por_año_defaultdict(lista_r):
-    contador = contador_por_año_defaultdict(lista_r)
-    print(f"El número de avistamientos por año es:")
-    for año, cantidad in contador.items():
-        print(f"\t{año}: {cantidad}")
-
-def test_contador_por_año_counter(lista_r):
-    contador = contador_por_año_counter(lista_r)
-    print(f"El número de avistamientos por año es:")
-    for año, cantidad in contador.items():
-        print(f"\t{año}: {cantidad}")
-
-def test_año_con_mas_avistamientos(lista_r):
-    año = año_con_mas_avistamientos(lista_r)
-    print(f"El año con más avistamientos es {año}")
-
-def test_año_con_mas_avistamientos_counter(lista_r):
-    año = año_con_mas_avistamientos_counter(lista_r)
-    print(f"El año con más avistamientos es {año}")
-
-def test_año_con_mas_avistamientos_forma_counter(lista_r):
-    año = año_con_mas_avistamientos_forma_counter(lista_r)
-    print(f"El año con más avistamientos es {año}")
-
 
 
 
@@ -116,9 +86,3 @@ if __name__ == "__main__":
     #test_punto_medio(lista_r)
     #test_avistamientos_en_radio(lista_r)
     #test_filtra_entre_fechas(lista_r)
-    #test_contador_por_año(lista_r)
-    #test_contador_por_año_defaultdict(lista_r)
-    #test_contador_por_año_counter(lista_r)
-    #test_año_con_mas_avistamientos(lista_r)
-    #test_año_con_mas_avistamientos_counter(lista_r)
-    #test_año_con_mas_avistamientos_forma_counter(lista_r)

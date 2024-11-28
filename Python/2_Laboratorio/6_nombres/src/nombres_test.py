@@ -58,7 +58,26 @@ def test_calcular_año_frecuencia_por_nombre(lista_r):
 def test_calcular_nombre_mas_frecuente_por_año(lista_r):
     genero_elegido="Hombre"
     diccionario_final=calcular_nombre_mas_frecuente_por_año(lista_fichero=lista_r, genero=genero_elegido)
-    print(f"El diccionario según el género {genero_elegido} es: {diccionario_final}")   
+    print(f"El diccionario según el género {genero_elegido} es: {diccionario_final}")
+
+def test_calcular_frecuencia_por_año(lista_r):
+    nombre_elegido="RODRIGO"
+    lista_tuplas=calcular_frecuencia_por_año(lista_fichero=lista_r, nombre=nombre_elegido)
+    print(f"La lista de tuplas (año, frecuencia) para el nombre {nombre_elegido} es: {lista_tuplas}")
+
+def test_mostrar_evolucion_por_año(lista_r):
+    nombre_elegido="RODRIGO"
+    evolucion = mostrar_evolucion_por_año(lista_fichero=lista_r, nombre=nombre_elegido)
+    print(f"La evolución de la frecuencia del nombre {nombre_elegido} es: {evolucion}")
+
+def test_calcular_frecuencias_por_nombre(lista_r):
+    resultado = calcular_frecuencias_por_nombre(lista_fichero=lista_r)
+    print(f"La frecuencia de cada nombre es {resultado}")
+
+def test_mostrar_frecuencias_nombres(lista_r):
+    limite_elegido=10
+    resultado = mostrar_frecuencias_nombres(lista_fichero=lista_r, limite=limite_elegido)
+    print(f"El diagrama de barras por frecuencia descendente de los {limite_elegido} nombres es: {resultado}")
 
 
 
@@ -75,7 +94,11 @@ def funcion_principal():
     #test_calcular_año_mas_frecuencia_nombre(lista_r)
     #test_calcular_nombres_mas_frecuentes(lista_r)
     #test_calcular_año_frecuencia_por_nombre(lista_r)
-    test_calcular_nombre_mas_frecuente_por_año(lista_r)
+    #test_calcular_nombre_mas_frecuente_por_año(lista_r)
+    #test_calcular_frecuencia_por_año(lista_r)
+    #test_mostrar_evolucion_por_año(lista_r)
+    #test_calcular_frecuencias_por_nombre(lista_r)
+    test_mostrar_frecuencias_nombres(lista_r)
 
 
 
