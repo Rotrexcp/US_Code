@@ -59,13 +59,21 @@ def registrar_tecla(event):
         elif tecla == "backspace":
             if len(texto) > 0:
                 texto = texto[:-1]
-                print(f"Texto actual: {texto}")
+                print(f"Texto backspace: {texto}")
             return
         elif tecla == "ctrl" or tecla == "alt":
             return
-        elif shift_presionado and tecla in shift_map:
-            registro_actual = shift_map[tecla]
+        
+        elif shift_presionado:
+            new_event = keyboard.KeyboardEvent("down", 0, "shift")
+            tecla=new_event.name
+            if tecla in shift_map:
+                print(f"{tecla} en Shift")
+                registro_actual = shift_map[tecla]
+            return
+
         elif altgr_presionado and tecla in Altgr_map:
+            print(f"{tecla} en AltGr")
             registro_actual = Altgr_map[tecla]
         elif tecla.isalpha() or tecla.isdigit() or tecla in ["-", ".", ",","´", "`", "+", "ç", "<", "º", "¡", "ñ", "'"]:
             registro_actual = tecla
@@ -73,7 +81,7 @@ def registrar_tecla(event):
             registro_actual = ""
 
         texto += registro_actual
-        print(f"Texto actual: {texto}")
+        print(f"Texto actualizado: {texto}")
 
 def iniciar_registro():
     """
