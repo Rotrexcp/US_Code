@@ -94,6 +94,13 @@ class ManagerApp(tk.Tk):
                     text=f"🐍 {archivo}",
                     command=lambda r=ruta_completa: self.ejecutar_archivo(r),
                 ).pack(fill="x", pady=2)
+            
+            elif archivo.endswith(".txt") and os.path.isfile(ruta_completa):
+                ttk.Button(
+                    self.file_frame,
+                    text=f"📄 {archivo}",
+                    command=lambda r=ruta_completa: self.abrir_txt(r),
+                ).pack(fill="x", pady=2)
 
     def abrir_carpeta(self, ruta):
         """
@@ -112,9 +119,18 @@ class ManagerApp(tk.Tk):
         respuesta = messagebox.askyesno("Ejecutar", f"¿Deseas ejecutar {os.path.basename(ruta)}?")
         if respuesta:
             try:
-                subprocess.run(["python", ruta], shell=True)
+                subprocess.run(["python", ruta, "--from-manager"], shell=True)
             except Exception as e:
                 messagebox.showerror("Error", f"No se pudo ejecutar el archivo: {e}")
+    
+    def abrir_txt(self, ruta):
+        """
+        Abre un archivo .txt con el programa predeterminado del sistema.
+        """
+        try:
+            subprocess.run(["notepad", ruta])  # En Windows, puedes abrir el .txt con el bloc de notas
+        except Exception as e:
+            messagebox.showerror("Error", f"No se pudo abrir el archivo .txt: {e}")
 
     def navegar_atras(self):
         """

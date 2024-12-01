@@ -18,6 +18,9 @@ Pasos para pasar un archivo .py a un ejecutable .exe:
     7.- Si deseas personalizar el icono del ejecutable, usa el parámetro '--icon':
         pyinstaller --onefile --icon=icono.ico nombre_del_archivo.py
 
+    8.- Si deseas actualizar el .exe:
+        pyinstaller -F -w -i nombre_del_icono.ico nombre_del_archivo.py
+
     8.- Distribuye el archivo '.exe' junto con cualquier otro recurso necesario.
 
 

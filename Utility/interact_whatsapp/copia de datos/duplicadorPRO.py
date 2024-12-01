@@ -1,4 +1,7 @@
 import keyboard
+import sys
+import pygetwindow as gw
+
 
 # Ruta del archivo para registrar las entradas
 RUTA_ARCHIVO = "C:/Users/rodri/OneDrive/Desktop/Carpeta/documentos/duplicado.txt"
@@ -105,9 +108,18 @@ def detener_registro():
     else:
         print("El registro de teclado no está activo.")
 
+def vaciar_registro():
+    """
+    Vacía el registro de teclas.
+    """
+    global texto
+    texto = ""
+    print("=== Registro de teclado vaciado ===")
+
 # Atajos para iniciar y detener el registro
 keyboard.add_hotkey("ctrl+alt+q", iniciar_registro)  # Inicia con Ctrl+Alt+Q
 keyboard.add_hotkey("ctrl+alt+w", detener_registro)  # Detiene con Ctrl+Alt+W
+keyboard.add_hotkey("ctrl+alt+v", vaciar_registro)  # Detiene con Ctrl+Alt+W
 
 # Registrar todas las teclas presionadas
 keyboard.on_press(registrar_tecla)
@@ -115,11 +127,12 @@ keyboard.on_press(registrar_tecla)
 # Mensaje inicial
 print("Presiona Ctrl+Alt+Q para iniciar el registro de teclas.")
 print("Presiona Ctrl+Alt+W para detener el registro de teclas.")
-print("Presiona Ctrl+C para salir del programa.")
+print("Presiona Ctrl+Alt+V para vaciar el registro de teclas.")
+print("Presiona Ctrl+Alt+X para salir del programa.")
 
 # Mantén el programa en ejecución
 try:
-    keyboard.wait("ctrl+c")  # Espera indefinidamente hasta que se pulse Ctrl+C
+    keyboard.wait("ctrl+alt+x")  # Espera indefinidamente hasta que se pulse Ctrl+C
     print(f"Todo el texto registrado: {texto}")
     with open(RUTA_ARCHIVO, "a", encoding="utf-8") as archivo:
         archivo.write(texto[:-1])
