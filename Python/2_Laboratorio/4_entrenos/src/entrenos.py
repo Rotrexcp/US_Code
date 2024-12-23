@@ -78,3 +78,63 @@ def suma_calorias(lista_calorias:list[Entreno], f_inicio:int, f_fin:int)->int:
             calorias_filtradas.append(calorias)
     
     return sum(calorias_filtradas)
+
+from datetime import date
+Venta = NamedTuple('Venta',[('fecha', date), ('concesionario', str), ('modelos', str),
+                    ('precio', float), ('unidades', int), ('financiado', bool)])
+def unidades_vendidas(lista_ventas:list[Venta],conj_modelos:set[str], fecha_inicial:date|None, fecha_final:date|None)->int:
+    conj_modelos=set()
+    lista_fil=[unidades.modelos for unidades in lista_ventas]
+    return sum(unidades.unidades for unidades in lista_ventas if unidades.modelos in conj_modelos)
+
+from collections import defaultdict
+def dicc_ganancias_por_año(lista_ventas:list[Venta],n:int)->dict[int,list[tuple[str,float]]]:
+    dict=defaultdict(int,list[tuple[str,float]])
+    for r in lista_ventas:
+        ganancia_bruta=r.unidades*r.precio
+        tupla=(r.modelos, ganancia_bruta)
+        dict[r.fecha.year].append(tupla)
+        sorted(dict.items(), key=lambda x:x[1], reverse=True)
+
+    return dict[:n]
+    resultado = {}
+    for año, ventas in dict.items():
+        ventas_ordenadas = sorted(ventas, key=lambda x: x[1], reverse=True)[:n]
+        resultado[año] = ventas_ordenadas
+
+    return resultado
+
+def max_unidades(lista_ventas:list[Venta])->int:
+    dict=defaultdict(int)
+    for r in lista_ventas:
+        clave=r.fecha.day
+        dict[clave]+=r.unidades
+    return max(dict[clave], key=lambda x:x[1])[1]
+
+def fechas_de_mas_ventas(lista_ventas:list[Venta])->list[date]:
+    lista_fecha_max_unidades=[]
+    tope_de_ventas=max_unidades(lista_ventas)
+    dict=defaultdict(int)
+    for r in lista_ventas:
+        clave=r.fecha.year
+        dict[clave]+=r.unidades
+        if dict[clave]==tope_de_ventas:
+            lista_fecha_max_unidades.append(dict[clave][1])
+    return lista_fecha_max_unidades
+
+def beneficio(lista_ventas:list[Venta])->float:
+    for r in lista_ventas:
+        ganancia_bruta=r.unidades*r.precio
+        if r.financiado==True:
+            return ganancia_bruta*0.05
+        else:
+            return ganancia_bruta*0.01
+
+def concesionario_mas_beneficio_modelo(lista_ventas:list[Venta],modelo:str|None)->str:
+    for r in lista_ventas:
+        if modelo != None:
+            if r.modelos == modelo:
+                lista_beneficios=[beneficio(lista_ventas)]
+        if modelo == None:
+            lista_beneficios=[beneficio(lista_ventas)]
+    return max(lista_beneficios)
