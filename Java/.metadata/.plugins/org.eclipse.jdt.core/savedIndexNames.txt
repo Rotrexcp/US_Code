@@ -1,0 +1,6 @@
+INDEX VERSION 1.134+C:\Users\rodri\OneDrive - UNIVERSIDAD DE SEVILLA\Desktop\US_Code\Java\.metadata\.plugins\org.eclipse.jdt.core
+451405265.index
+1728557082.index
+1865797976.index
+1873942223.index
+291087151.index
