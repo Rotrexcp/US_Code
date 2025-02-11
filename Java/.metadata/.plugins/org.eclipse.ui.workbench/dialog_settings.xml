@@ -12,6 +12,7 @@
 		<item key="WizardFileSystemResourceImportPage1.STORE_OVERWRITE_EXISTING_RESOURCES_ID" value="false"/>
 		<item key="WizardFileSystemResourceImportPage1.STORE_CREATE_CONTAINER_STRUCTURE_ID" value="false"/>
 		<list key="WizardFileSystemResourceImportPage1.STORE_SOURCE_NAMES_ID">
+			<item value="C:\Users\rodri\OneDrive - UNIVERSIDAD DE SEVILLA\Desktop\US_Code\Java\Aeropuerto\src\fp\aeropuerto"/>
 			<item value="C:\Users\rodri\OneDrive - UNIVERSIDAD DE SEVILLA\Desktop\US_Code\Java\clases\clase\Jugador\src\fp_test"/>
 			<item value="C:\Users\rodri\OneDrive - UNIVERSIDAD DE SEVILLA\Desktop\US_Code\Java\clases\clase\Jugador\src\fp"/>
 			<item value="C:\Users\rodri\OneDrive - UNIVERSIDAD DE SEVILLA\Desktop\US_Code\Java\clases\clase\Animales\src\fp\test"/>
