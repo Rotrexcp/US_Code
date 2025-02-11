@@ -1,0 +1,5 @@
+package fp.animales.copy;
+
+public enum Color {
+	ROJO, NEGRO, BLANCO
+}
