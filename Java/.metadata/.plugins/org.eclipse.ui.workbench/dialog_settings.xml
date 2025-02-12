@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="ImportExportAction">
-		<item key="ImportExportPage.STORE_SELECTED_IMPORT_WIZARD_ID" value="org.eclipse.ui.wizards.import.FileSystem"/>
+		<item key="ImportExportPage.STORE_SELECTED_IMPORT_WIZARD_ID" value="org.eclipse.e4.ui.importer.wizard"/>
 		<list key="ImportExportPage.STORE_EXPANDED_IMPORT_CATEGORIES">
 			<item value="org.eclipse.ui.Basic"/>
+			<item value="org.eclipse.egit.ui.internal.clone.gitclonecategory"/>
 		</list>
 		<section name="ImportExportWizard.dialogBounds">
+			<item key="DIALOG_X_ORIGIN" value="859"/>
+			<item key="DIALOG_Y_ORIGIN" value="277"/>
+			<item key="DIALOG_WIDTH" value="700"/>
+			<item key="DIALOG_HEIGHT" value="550"/>
+			<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
 		</section>
 	</section>
 	<section name="FileSystemImportWizard">
 		<item key="WizardFileSystemResourceImportPage1.STORE_OVERWRITE_EXISTING_RESOURCES_ID" value="false"/>
 		<item key="WizardFileSystemResourceImportPage1.STORE_CREATE_CONTAINER_STRUCTURE_ID" value="false"/>
 		<list key="WizardFileSystemResourceImportPage1.STORE_SOURCE_NAMES_ID">
+			<item value="C:\Users\rodri\OneDrive - UNIVERSIDAD DE SEVILLA\Desktop\Aeropuerto__\src\fp\aeropuerto"/>
 			<item value="C:\Users\rodri\OneDrive - UNIVERSIDAD DE SEVILLA\Desktop\US_Code\Java\Aeropuerto\src\fp\aeropuerto"/>
 			<item value="C:\Users\rodri\OneDrive - UNIVERSIDAD DE SEVILLA\Desktop\US_Code\Java\clases\clase\Jugador\src\fp_test"/>
 			<item value="C:\Users\rodri\OneDrive - UNIVERSIDAD DE SEVILLA\Desktop\US_Code\Java\clases\clase\Jugador\src\fp"/>
@@ -21,8 +28,8 @@
 			<item value="C:\Users\rodri\OneDrive - UNIVERSIDAD DE SEVILLA\Desktop\US_Code\Java\clases\clase\Aeropuerto\aeropuerto"/>
 		</list>
 		<section name="FileSystemImportWizard.dialogBounds">
-			<item key="DIALOG_X_ORIGIN" value="619"/>
-			<item key="DIALOG_Y_ORIGIN" value="202"/>
+			<item key="DIALOG_X_ORIGIN" value="859"/>
+			<item key="DIALOG_Y_ORIGIN" value="277"/>
 			<item key="DIALOG_WIDTH" value="805"/>
 			<item key="DIALOG_HEIGHT" value="703"/>
 			<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
@@ -33,15 +40,20 @@
 			<item key="DIALOG_X_ORIGIN" value="619"/>
 			<item key="DIALOG_Y_ORIGIN" value="254"/>
 			<item key="DIALOG_WIDTH" value="700"/>
-			<item key="DIALOG_HEIGHT" value="500"/>
+			<item key="DIALOG_HEIGHT" value="505"/>
 			<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
 		</section>
 	</section>
 	<section name="WorkbenchPreferenceDialog.dialogBounds">
 		<item key="DIALOG_X_ORIGIN" value="632"/>
 		<item key="DIALOG_Y_ORIGIN" value="187"/>
-		<item key="DIALOG_WIDTH" value="674"/>
-		<item key="DIALOG_HEIGHT" value="589"/>
+		<item key="DIALOG_WIDTH" value="925"/>
+		<item key="DIALOG_HEIGHT" value="908"/>
 		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
+	</section>
+	<section name="org.eclipse.ui.preferences.keysPreferencePage">
+		<item key="actionSetFilter" value="true"/>
+		<item key="internalFilter" value="true"/>
+		<item key="uncategorizedFilter" value="true"/>
 	</section>
 </section>

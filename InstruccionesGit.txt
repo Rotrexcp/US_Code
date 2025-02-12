@@ -1,0 +1,6 @@
+Instrucciones para subir proyectos a un repositorio de GitHub desde TERMINAL:
+click derecho sobre la carpeta a subir y abrir con terminal (evita el cd "ruta")
+1) inicializar git -> git init [si ya en la carpeta nos aparece una carpeta oculta .git no hace falta ir al punto 2]
+	1.1) vincular la carpeta al repositorio -> git remote add origin https://github.com/Usuario/NombreRepo.git
+** para ver que ramas tienes y en cual estas -> git Branch ; si no hay seleccionada -> git checkout "rama"
+2) comprobar en que rama estas -> git status
