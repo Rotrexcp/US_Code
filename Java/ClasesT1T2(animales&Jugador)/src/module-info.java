@@ -4,5 +4,5 @@
 /**
  * 
  */
-module Animales {
+module Clase1 {
 }

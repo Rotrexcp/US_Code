@@ -1,4 +1,4 @@
-package fp.animales;
+package fp;
 
 public class Gato implements Animal{
 

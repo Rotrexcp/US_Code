@@ -1,8 +1,9 @@
 package fp.test;
 
-import fp.animales.*;
+import fp.Color;
+import fp.Perro;
 
-public class test_animales {
+public class Test {
 
 	public static void main(String[] args) {
 		
