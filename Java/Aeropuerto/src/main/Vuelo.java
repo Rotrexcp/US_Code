@@ -24,6 +24,7 @@ public class Vuelo {
       this.tripulacion = tripulacion;
       this.completo = completo;
       this.porcentaje = porcentaje;
+      this.incrementaPrecioPorcentaje(porcentaje);
    }
 
    private void CheckNumPlazas(Integer num_plazas) {
