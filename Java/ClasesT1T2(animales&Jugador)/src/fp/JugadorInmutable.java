@@ -39,14 +39,14 @@ public record JugadorInmutable(
 				.getYears();
 	}
 	
-	// No está: compareTo
-	public int compareTo(JugadorInmutable o) {
-		int r = this.nombre().compareTo(o.nombre());
-		if(r==0) {
-			r = this.fechaNacimiento().compareTo(o.fechaNacimiento());
-		}
-		return r;
-	}
+//	// No está: compareTo
+//	public int compareTo(JugadorInmutable o) {
+//		int r = this.nombre().compareTo(o.nombre());
+//		if(r==0) {
+//			r = this.fechaNacimiento().compareTo(o.fechaNacimiento());
+//		}
+//		return r;
+//	}
 
 	
 }

@@ -43,5 +43,14 @@ Nota:
 	Básicas: 
 		String asignatura
 		Integer curso_academico (en toString añadir "/")
+		Enum -> Convocatoria convocatoria
+		Integer valor
+		Boolean matricula
+	
+	Derivadas:
+		Enum calificacion
 		
-		mencion_honor es RESTRICCION (bool)
+- Se trata de un RECORD porque "Ninguna de las propiedades que definen a una asignatura varía, una vez creada la misma."
+
+				
+mencion_honor es RESTRICCION (bool)

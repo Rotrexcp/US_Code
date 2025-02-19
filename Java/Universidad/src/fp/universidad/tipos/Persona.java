@@ -25,7 +25,7 @@ public class Persona {
 		//TODO: Restricciones
 		
 	}
-	//Constructor 2
+		//Constructor 2
 	public Persona(String dni, String nombre, String apellidos, LocalDate fechaNacimiento) {
 		//Asignaciones
 		this(dni, nombre, apellidos, fechaNacimiento, ""); //Llamando al constructor canónico y ahorro código
@@ -33,7 +33,7 @@ public class Persona {
 		//TODO: Restricciones
 	}
 	
-		//Getters & Setters
+	//Getters & Setters
 	public String getDni() {
 		return dni;
 	}
@@ -65,16 +65,16 @@ public class Persona {
 		this.email = email;
 	}
 	
-		//propiedad derivada: edad
+	//propiedad derivada: edad
 	public Integer getEdad() {
 		return Period.between(fechaNacimiento, LocalDate.now()).getYears();
 	}
 	
-		//toString, equals, hashcode
-		//"28864657W – García Vaquero, Pascual – 15/09/1998"
+	//toString, equals, hashcode
+	//"28864657W – García Vaquero, Pascual – 15/09/1998"
 	public String toString() {
 		return dni + " - " + apellidos + ", " + nombre + " - " + fechaNacimiento.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 	}
 	
-		//compareTo
+	//compareTo
 }

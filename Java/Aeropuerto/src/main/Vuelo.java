@@ -1,30 +1,19 @@
-// Source code is decompiled from a .class file using FernFlower decompiler.
 package main;
-
-import java.time.Duration;
-import java.time.LocalDate;
-import java.util.List;
+import java.time.*; import java.util.List;
+import java.util.Objects;
 
 public class Vuelo {
-   private Trayecto trayecto;
-   private Double precio;
-   private Integer num_pasajeros;
-   private Integer num_plazas;
-   private String codigo;
-   private LocalDate fecha;
-   private Duration duracion;
-   private List<String> tripulacion;
-   private Integer duracion_minutos;
-   private Boolean completo;
-   private Double porcentaje;
+   private Trayecto trayecto; private Double precio; private Integer num_pasajeros; private Integer num_plazas;
+   private String codigo; private LocalDate fecha; private Duration duracion; private List<String> tripulacion; private Boolean completo; private Double porcentaje;
 
-   public Vuelo(Trayecto trayecto, Double precio, Integer num_pasajeros, Integer num_plazas, String codigo, LocalDate fecha, Duration duracion, List<String> tripulacion, String origen, String destino, Integer duracion_minutos, Boolean completo, Double porcentaje) {
-      this.CheckNumPlazas(num_plazas);
-      this.CheckNumPasajeros(num_pasajeros);
-      this.CheckPrecio(precio);
-      this.CheckNumPasajerosVSPlazas(num_pasajeros, num_plazas);
-      this.CheckTripulacion(tripulacion.size());
-      this.CheckCodigo(codigo);
+   public Vuelo(Trayecto trayecto, Double precio, Integer num_pasajeros, Integer num_plazas, String codigo, 
+		   LocalDate fecha, Duration duracion, List<String> tripulacion, Boolean completo, Double porcentaje) {
+      CheckNumPlazas(num_plazas);
+      CheckNumPasajeros(num_pasajeros);
+      CheckPrecio(precio);
+      CheckNumPasajerosVSPlazas(num_pasajeros, num_plazas);
+      CheckCodigo(codigo);
+      CheckTripulacion(tripulacion);
       this.trayecto = trayecto;
       this.precio = precio;
       this.num_pasajeros = num_pasajeros;
@@ -33,7 +22,6 @@ public class Vuelo {
       this.fecha = fecha;
       this.duracion = duracion;
       this.tripulacion = tripulacion;
-      this.duracion_minutos = duracion_minutos;
       this.completo = completo;
       this.porcentaje = porcentaje;
    }
@@ -62,17 +50,30 @@ public class Vuelo {
       }
    }
 
-   private void CheckTripulacion(Integer tripulacion) {
-      if (tripulacion < 3) {
-         throw new IllegalArgumentException("El numero de tripulantes al menos deben ser 3 (un piloto, un copiloto y al menos un asistente)");
+   private void CheckCodigo(String codigo) {
+      if (codigo.length() != 6) {
+         throw new IllegalArgumentException("El codigo tiene que tener 6 caracteres");
+      } else if (!codigo.matches("[A-Z]{2}\\d{4}")) {
+         throw new IllegalArgumentException("El codigo de cada tripulante debe tener 2 mayusculas significativas seguido de 4 digitos");
       }
    }
 
-   private void CheckCodigo(String codigo) {
-      if (codigo.length() != 6) {
-         throw new IllegalArgumentException("El c\u00f3digo tiene que tener 6 caracteres");
-      } else if (!codigo.matches("[A-Z]{2}\\d{4}")) {
-         throw new IllegalArgumentException("El c\u00f3digo debe tener 2 mayusculas y seguido de 4 d\u00edgitos");
+   private void CheckTripulacion(List<String> tripulacion) {
+      if (tripulacion.size() < 3) {
+         throw new IllegalArgumentException("El numero de tripulantes al menos deben ser 3 (un piloto, un copiloto y al menos un asistente)");
+      }
+      long pilotos = tripulacion.stream().filter(t -> t.startsWith("PP")).count();
+      long copilotos = tripulacion.stream().filter(t -> t.startsWith("CP")).count();
+      long asistentes = tripulacion.stream().filter(t -> t.startsWith("AV")).count();
+
+      if (pilotos != 1) {
+          throw new IllegalArgumentException("Debe haber exactamente un piloto.");
+      }
+      if (copilotos != 1) {
+          throw new IllegalArgumentException("Debe haber exactamente un copiloto.");
+      }
+      if (asistentes < 1) {
+          throw new IllegalArgumentException("Debe haber al menos un asistente.");
       }
    }
 
@@ -141,16 +142,8 @@ public class Vuelo {
    }
 
    public void setTripulacion(List<String> tripulacion) {
-      this.CheckTripulacion(tripulacion.size());
+      this.CheckTripulacion(tripulacion);
       this.tripulacion = tripulacion;
-   }
-
-   public Integer getDuracion_minutos() {
-      return this.duracion_minutos;
-   }
-
-   public void setDuracion_minutos(Integer duracion_minutos) {
-      this.duracion_minutos = duracion_minutos;
    }
 
    public Boolean getCompleto() {
@@ -160,12 +153,47 @@ public class Vuelo {
    public void setCompleto(Boolean completo) {
       this.completo = completo;
    }
-
+   
    public Double getPorcentaje() {
-      return this.porcentaje;
-   }
+	      return this.porcentaje;
+	   }
 
-   public void setPorcentaje(Double porcentaje) {
-      this.porcentaje = porcentaje;
-   }
+	   public void setPorcentaje(Double porcentaje) {
+	      this.porcentaje = porcentaje;
+	   }
+   
+		@Override
+	public int hashCode() {
+		return Objects.hash(codigo, fecha);
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Vuelo other = (Vuelo) obj;
+		return Objects.equals(codigo, other.codigo) && Objects.equals(fecha, other.fecha);
+	}
+	
+	public int compareTo(Vuelo o) {
+		int r = this.fecha.compareTo(o.fecha);
+		if(r==0) {
+			r = this.codigo.compareTo(o.codigo);
+		}
+		return r;
+	}
+	
+	private void incrementaPrecioPorcentaje(Double porcentaje) {
+		Double p = getPrecio();
+		setPrecio(p*porcentaje + p);
+	}
+	
+	@Override
+	public String toString() {
+		return "Vuelo [trayecto=" + trayecto + ", codigo=" + codigo + ", fecha=" + fecha + "]";
+	}
 }

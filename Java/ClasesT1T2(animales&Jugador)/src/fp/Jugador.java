@@ -17,7 +17,7 @@ public class Jugador implements Comparable<Jugador> {
 	
 	// Métodos
 	// Constructor canónico
-	public Jugador(String nombre,
+		public Jugador(String nombre,
 			LocalDate fechaNacimiento,
 			Integer altura,
 			String nacionalidad) {
@@ -182,8 +182,4 @@ public class Jugador implements Comparable<Jugador> {
 		return r;
 	}
 	
-	
-	
-	
-
 }
