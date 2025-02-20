@@ -1,5 +1,7 @@
 package fp.universidad.tipos;
 
+import fp.utiles.Checkers;
+
 public class Espacio {
 	//Atributos
 	private TipoEspacio tipo;
@@ -10,9 +12,9 @@ public class Espacio {
 		//Constructor
 	//Canónico
 	public Espacio(TipoEspacio tipo, String nombre, Integer capacidad) {
-		this.tipo = tipo;
-		this.nombre = nombre;
-		this.capacidad = capacidad;
+		setTipo(tipo);
+		setNombre(nombre);
+		setCapacidad(capacidad);
 		
 		//TODO: Restricciones
 		
@@ -22,26 +24,27 @@ public class Espacio {
 	public TipoEspacio getTipo() {
 		return tipo;
 	}
-
 	public void setTipo(TipoEspacio tipo) {
 		this.tipo = tipo;
 	}
+	
 
 	public String getNombre() {
 		return nombre;
 	}
-
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	
 
 	public Integer getCapacidad() {
 		return capacidad;
 	}
-
 	public void setCapacidad(Integer capacidad) {
+		Checkers.check("Capacidad debe ser mayor que 0", capacidad>0);
 		this.capacidad = capacidad;
 	}
+	
 	
 		//propiedad derivada: planta
 	public Integer getPlanta() {
@@ -57,10 +60,4 @@ public class Espacio {
 	public String toString() {
 		return nombre + " (planta " + getPlanta() + ") ";
 	}
-	
-		
-	
-		
-	
-	
 }

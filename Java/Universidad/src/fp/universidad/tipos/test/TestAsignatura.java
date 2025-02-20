@@ -7,12 +7,24 @@ import fp.universidad.tipos.TipoAsignatura;
 
 public class TestAsignatura {
 
+	
+	
 	public static void main(String[] args) {
-		Asignatura fp = new Asignatura("Fundamentos de Programación","0000230",12.,TipoAsignatura.ANUAL,1);
+		try {
+			Asignatura fp1 = new Asignatura("Fundamentos de Programación","0000230",12.,TipoAsignatura.ANUAL,1);
 		
-		System.out.println(fp);
-		System.out.println(fp.codigo());
-		System.out.println(fp.creditos());
+			System.out.println(fp1);
+			System.out.println(fp1.codigo());
+			System.out.println(fp1.creditos());
+		}
+		
+		catch(Exception e){
+			System.out.println(e);
+		}
+		
+		Asignatura fp1 = new Asignatura("Fundamentos de Programación","0000230",12.,TipoAsignatura.ANUAL,1);
+		Asignatura fp2 = new Asignatura("Fundamentos de Programación","0000230",12.,TipoAsignatura.ANUAL,1);
+		
+		System.out.println(fp1.equals(fp2));
 	}
-
 }
