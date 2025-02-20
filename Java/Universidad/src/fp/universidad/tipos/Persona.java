@@ -12,24 +12,26 @@ public class Persona {
 	private String apellidos;
 	private LocalDate fechaNacimiento;
 	private String email;
+	private Integer edad;
 	
 	//Metodos
 		//Constructor -> Siempre público llamado igual que la clase
 	//Constructor canónico
-	public Persona(String dni, String nombre, String apellidos, LocalDate fechaNacimiento, String email) {
+	public Persona(String dni, String nombre, String apellidos, LocalDate fechaNacimiento, String email, Integer edad) {
 		//Asignaciones
+		setDni(dni);
 		setNombre(nombre);
 		setApellidos(apellidos);
 		setFechaNacimiento(fechaNacimiento);
 		setEmail(email);
-		setDni(dni);
+		setEdad(edad);
 		
 		
 	}
 		//Constructor 2
-	public Persona(String dni, String nombre, String apellidos, LocalDate fechaNacimiento) {
+	public Persona(String dni, String nombre, String apellidos, LocalDate fechaNacimiento, Integer edad) {
 		//Asignaciones
-		this(dni, nombre, apellidos, fechaNacimiento, ""); //Llamando al constructor canónico y ahorro código
+		this(dni, nombre, apellidos, fechaNacimiento, "", edad); //Llamando al constructor canónico y ahorro código
 		
 		//TODO: Restricciones
 	}
@@ -95,10 +97,13 @@ public class Persona {
 		this.email = email;
 	}
 	
-	
 	//propiedad derivada: edad
 	public Integer getEdad() {
 		return Period.between(fechaNacimiento, LocalDate.now()).getYears();
+	}
+	
+	public void setEdad(Integer edad) {
+		this.edad = edad;
 	}
 	
 	

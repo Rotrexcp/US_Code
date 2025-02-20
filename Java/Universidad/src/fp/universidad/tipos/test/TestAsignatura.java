@@ -11,8 +11,12 @@ public class TestAsignatura {
 	
 	public static void main(String[] args) {
 		try {
-			Asignatura fp1 = new Asignatura("Fundamentos de Programación","0000230",12.,TipoAsignatura.ANUAL,1);
-		
+			Asignatura fp1 = new Asignatura("Fundamentos de Programación(Python)","0000230",6.,TipoAsignatura.ANUAL,1);
+			Asignatura fp2 = new Asignatura("Fundamentos de Programación(Java)","0000230",6.,TipoAsignatura.ANUAL,1);
+			Asignatura falso1 = new Asignatura("a", "1234567",13.,TipoAsignatura.ANUAL,4);
+			
+			System.out.println(fp1.equals(fp2));
+			System.out.println(fp1.equals(falso1));
 			System.out.println(fp1);
 			System.out.println(fp1.codigo());
 			System.out.println(fp1.creditos());
@@ -22,9 +26,6 @@ public class TestAsignatura {
 			System.out.println(e);
 		}
 		
-		Asignatura fp1 = new Asignatura("Fundamentos de Programación","0000230",12.,TipoAsignatura.ANUAL,1);
-		Asignatura fp2 = new Asignatura("Fundamentos de Programación","0000230",12.,TipoAsignatura.ANUAL,1);
 		
-		System.out.println(fp1.equals(fp2));
 	}
 }

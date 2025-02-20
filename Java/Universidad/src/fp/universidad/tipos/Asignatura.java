@@ -12,10 +12,12 @@ public record Asignatura (String nombre, String codigo, Double creditos, TipoAsi
 		//Restricciones
 		//compareTo
 	
+	
 	//TODO: Propiedad derivada: acronimo (significa TO DO [por hacer, no "todo"])
 	public String acronimo() {
 		return null;
 	}
+	
 	
 	//toString, sobre escribirlo
 	@Override
@@ -24,6 +26,12 @@ public record Asignatura (String nombre, String codigo, Double creditos, TipoAsi
 	}
 	
 	
+	//Restricciones		OJO no podemos poner setDigitos() y dentro del set poner el check porque los record NO TIENEN getters ni setters
+	public Asignatura{
+		Checkers.check("Creditos no validos",creditos != null && creditos > 0); //otra forma de definir las restricciones mas rapida
+		Checkers.check("Codigo incorrecto", EsCodigoValido(codigo) && codigo.length() == 7);
+		Checkers.check("curso no valido", curso >= 1 && curso <= 4);
+	}
 	
 	private boolean EsCodigoValido(String codigo) {
 		Boolean res = true;
@@ -37,26 +45,6 @@ public record Asignatura (String nombre, String codigo, Double creditos, TipoAsi
 		return res;
 	}
 	
-	//Restricciones
-	public Asignatura{
-		CheckDigitos(codigo);
-		CheckCreditos(creditos);
-		Checkers.check("Creditos no validos",creditos != null && creditos >= 0); //otra forma de definir las restricciones mas rapida
-		Checkers.check("Codigo incorrecto", EsCodigoValido(codigo) && codigo.length() == 7);
-	}
-
-	private void CheckCreditos(Double creditos) {
-		if(creditos == null || creditos <= 0) {
-			throw new IllegalArgumentException("Credito no valido");
-		}
-	}
-	
-	private void CheckDigitos(String codigo) {
-		if(codigo.length()!=7) {
-			throw new IllegalArgumentException("No se puede más de 7 dígitos");
-		}
-	}
-	
 	
 	//Equals, hashCode, CompareTo
 	public int hashCode() {
@@ -67,7 +55,7 @@ public record Asignatura (String nombre, String codigo, Double creditos, TipoAsi
 		if(this == o) return true;
 		if(o instanceof Asignatura) {
 			Asignatura asignatura = (Asignatura) o;		//Hemos parseado "o" como asignatura ya que es un tipo Object y lo pasamos a Asignatura
-			return codigo.equals(asignatura.codigo);	//Son iguales si sus códigos son iguales
+			return this.codigo.equals(asignatura.codigo);	//Son iguales si sus códigos son iguales
 		}
 		return false;
 	}
