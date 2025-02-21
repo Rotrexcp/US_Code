@@ -54,10 +54,35 @@ public class Espacio {
 		return planta;
 	}
 
+	
 		//toString
 		//"A3.10 (planta 3)"
 	@Override
 	public String toString() {
 		return nombre + " (planta " + getPlanta() + ") ";
+	}
+	
+	
+	public int hashCode() {
+		return getNombre().hashCode() + 31*getPlanta().hashCode();
+	}
+	
+	
+	public boolean equals(Object o) {
+		if(this == o) return true;
+		if(o instanceof Espacio) {
+			Espacio espacio = (Espacio) o;
+			return getNombre().equals(espacio.getNombre()) && getPlanta().equals(espacio.getPlanta());
+		}
+		return false;
+	}
+	
+	
+	public int compareTo(Espacio o) {
+		int res = getPlanta().compareTo(o.getPlanta());
+		if(res == 0) {
+			res = getNombre().compareTo(o.getNombre());
+		}
+		return res;
 	}
 }
