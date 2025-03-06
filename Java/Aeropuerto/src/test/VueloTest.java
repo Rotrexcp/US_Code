@@ -30,7 +30,7 @@ public class VueloTest {
 		
 		System.out.println(v1.equals(v2));
 		System.out.println(v2.compareTo(v1));
-		System.out.println(v1.incrementaPrecioPorcentaje(0.2));
+		//System.out.println(v1.incrementaPrecioPorcentaje(0.2));
 	}
 
 }
