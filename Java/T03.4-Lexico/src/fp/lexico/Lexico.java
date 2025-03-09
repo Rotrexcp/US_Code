@@ -62,15 +62,26 @@ public class Lexico {
 		palabras.addAll(minuscula(palabras));
 	}
 	
-	public Set<String> getPalabrasComunes(Lexico lexico){
-		Set<String> res = new HashSet<>();
-		if(palabras.retainAll(lexico.getPalabras())==true) {
-			for(String i: lexico.getPalabras()) {
-				if(palabras == lexico.getPalabras()) {
-					res.add(i);
-				}
-			}
-		}
+	public Set<String> getPalabrasComunes(Lexico lexico) {
+	    Set<String> res = new HashSet<>(palabras);
+	    res.retainAll(lexico.getPalabras());
+	    return res;
+	}
+	
+	public Set<String> getTodasPalabras(Lexico lexico){
+		Set<String> res = new HashSet<>(palabras);
+		res.addAll(lexico.getPalabras());
 		return res;
 	}
+	
+	public Set<String> getDiferenciaPalabras(Lexico lexico){
+		Set<String> res = new HashSet<>(palabras);
+	    res.retainAll(lexico.getPalabras());
+	    
+	    Set<String> dif = new HashSet<>(lexico.getPalabras());
+	    dif.removeAll(res);
+	    return dif;
+	}
+	
+	
 }

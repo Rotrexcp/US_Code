@@ -24,7 +24,9 @@ public class TestLexico {
 		
 		List<String> palabras2 = Arrays.asList("patata", "padre", "fanta", "hermano", "piedra");
 		Lexico conj2 = new Lexico(palabras2);
+		
 		System.out.println(conj1.getPalabrasComunes(conj2) + "\n");
+		System.out.println(conj1.getDiferenciaPalabras(conj2) + "\n");
 	}
 
 }
