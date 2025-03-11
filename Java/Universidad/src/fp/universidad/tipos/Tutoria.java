@@ -12,11 +12,6 @@ public record Tutoria(String dia_semana, LocalTime hora_comienzo, LocalTime hora
 		return (int) hora_comienzo.until(hora_fin, null);
 	}
 	
-	
-	
-	
-	
-	
 	public String toString() {
 		return dia_semana + " " + hora_comienzo + "-" + hora_fin;
 	}
