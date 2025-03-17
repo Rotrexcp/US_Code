@@ -27,7 +27,7 @@ public class Lexico {
 	
 	
 	public SortedSet<String> getPalabras(){
-		return palabras;
+		return new TreeSet<String>(this.palabras);		//Para que se haga una copia y no se modifique el original
 	}
 	
 	public Integer getTotalPalabras() {
@@ -63,22 +63,22 @@ public class Lexico {
 	}
 	
 	public Set<String> getPalabrasComunes(Lexico lexico) {
-	    Set<String> res = new HashSet<>(palabras);
+	    Set<String> res = getPalabras();
 	    res.retainAll(lexico.getPalabras());
 	    return res;
 	}
 	
 	public Set<String> getTodasPalabras(Lexico lexico){
-		Set<String> res = new HashSet<>(palabras);
+		Set<String> res = getPalabras();
 		res.addAll(lexico.getPalabras());
 		return res;
 	}
 	
 	public Set<String> getDiferenciaPalabras(Lexico lexico){
-		Set<String> res = new HashSet<>(palabras);
+		Set<String> res = getPalabras();
 	    res.retainAll(lexico.getPalabras());
 	    
-	    Set<String> dif = new HashSet<>(lexico.getPalabras());
+	    Set<String> dif = lexico.getPalabras();
 	    dif.removeAll(res);
 	    return dif;
 	}
