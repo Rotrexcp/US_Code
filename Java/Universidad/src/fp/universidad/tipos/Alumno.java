@@ -12,8 +12,8 @@ public class Alumno extends Persona{
 		super(dni, nombre, apellidos, fechaNacimiento, email);
 		setEmail(email);
 		
-		this.asignaturas= new HashSet<Asignatura>();
-		this.expediente= new Expediente();
+		this.asignaturas = new HashSet<Asignatura>();
+		this.expediente = new Expediente();
 		
 	}
 	

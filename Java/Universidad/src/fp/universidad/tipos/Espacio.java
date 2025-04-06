@@ -1,12 +1,18 @@
 package fp.universidad.tipos;
 
-import fp.utiles.Checkers;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.*;
+
+import fp.utiles.*;
 
 public class Espacio {
 	//Atributos
 	private TipoEspacio tipo;
 	private String nombre;
 	private Integer capacidad;
+	private Integer planta;
 	
 	//Métodos
 		//Constructor
@@ -18,6 +24,15 @@ public class Espacio {
 		
 		//TODO: Restricciones
 		
+	}
+	
+	public Espacio(String c) {
+		String [] trozos = c.split(",");
+		Checkers.check("cadena no trozeada", trozos.length==4);
+		this.nombre = trozos[0].strip();
+		this.planta = Integer.parseInt(trozos[1].strip());
+		this.capacidad = Integer.parseInt(trozos[2].strip());
+		this.tipo = TipoEspacio.valueOf(trozos[3].strip());
 	}
 
 		//Getters & Setters
@@ -45,12 +60,7 @@ public class Espacio {
 		this.capacidad = capacidad;
 	}
 	
-	
-		//propiedad derivada: planta
 	public Integer getPlanta() {
-		char character = nombre.charAt(1);
-		String p = String.valueOf(character);
-		Integer planta = Integer.valueOf(p);
 		return planta;
 	}
 
@@ -59,12 +69,12 @@ public class Espacio {
 		//"A3.10 (planta 3)"
 	@Override
 	public String toString() {
-		return nombre + " (planta " + getPlanta() + ") ";
+		return nombre + " (planta " + planta + ") ";
 	}
 	
 	
 	public int hashCode() {
-		return getNombre().hashCode() + 31*getPlanta().hashCode();
+		return getNombre().hashCode() + 31*planta.hashCode();
 	}
 	
 	
@@ -72,14 +82,14 @@ public class Espacio {
 		if(this == o) return true;
 		if(o instanceof Espacio) {
 			Espacio espacio = (Espacio) o;
-			return getNombre().equals(espacio.getNombre()) && getPlanta().equals(espacio.getPlanta());
+			return getNombre().equals(espacio.getNombre()) && planta.equals(espacio.planta);
 		}
 		return false;
 	}
 	
 	
 	public int compareTo(Espacio o) {
-		int res = getPlanta().compareTo(o.getPlanta());
+		int res = planta.compareTo(o.planta);
 		if(res == 0) {
 			res = getNombre().compareTo(o.getNombre());
 		}

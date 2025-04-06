@@ -42,6 +42,7 @@ public class Centro {
 	public Set<Espacio> getEspacio() {
 		return espacio;
 	}
+	
 	public void setEspacio(Set<Espacio> espacio) {
 		nuevoEspacio(espacio);
 		eliminaEspacio(espacio);
@@ -77,7 +78,8 @@ public class Centro {
 		return res;
 	}
 	
-	public ArrayList<Integer> getConteosEspacios(Integer num_espacios){
+	
+	public ArrayList<Integer> getConteosEspacios(Centro c){
 		//TODO
 		return null;
 	}
