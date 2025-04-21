@@ -1,173 +1,152 @@
 package main;
-import java.time.*; import java.util.List;
+
+import java.time.Duration;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
-public class Vuelo {
-   private Trayecto trayecto; private Double precio; private Integer num_pasajeros; private Integer num_plazas;
-   private String codigo; private LocalDate fecha; private Duration duracion; private List<String> tripulacion; private Boolean completo; private Double porcentaje;
 
-   public Vuelo(Trayecto trayecto, Double precio, Integer num_pasajeros, Integer num_plazas, String codigo, 
-		   LocalDate fecha, Duration duracion, List<String> tripulacion, Boolean completo, Double porcentaje) {
-      CheckNumPlazas(num_plazas);
-      CheckNumPasajeros(num_pasajeros);
-      CheckPrecio(precio);
-      CheckNumPasajerosVSPlazas(num_pasajeros, num_plazas);
-      CheckCodigo(codigo);
-      CheckTripulacion(tripulacion);
-      this.trayecto = trayecto;
-      this.precio = precio;
-      this.num_pasajeros = num_pasajeros;
-      this.num_plazas = num_plazas;
-      this.codigo = codigo;
-      this.fecha = fecha;
-      this.duracion = duracion;
-      this.tripulacion = tripulacion;
-      this.completo = completo;
-      this.porcentaje = porcentaje;
-      this.incrementaPrecioPorcentaje(porcentaje);
-   }
+import utiles.Checkers;
+//import utiles.Validators;
 
-   private void CheckNumPlazas(Integer num_plazas) {
-      if (num_plazas < 0) {
-         throw new IllegalArgumentException("El numero de plazas no puede ser negativo");
-      }
-   }
+public class Vuelo implements Comparable<Vuelo> {
+	private Trayecto trayecto;
+	private Double precio;
+	private Integer numPasajeros;
+	private Integer numPlazas;
+	private String codigo;
+	private LocalDate fecha;
+	private Duration duracion;
+	private List<String> tripulacion;
 
-   private void CheckNumPasajeros(Integer num_pasajeros) {
-      if (num_pasajeros <= 0) {
-         throw new IllegalArgumentException("El numero de pasajeros no puede ser negativo o cero");
-      }
-   }
+	public Vuelo(Trayecto trayecto, Double precio, Integer numPasajeros, Integer numPlazas, String codigo,
+			LocalDate fecha, Duration duracion, List<String> tripulacion) {
+		
+		Checkers.check("Vuelo::El precio no es mayor que cero", precio > 0);
+		Checkers.check("Vuelo::Numero de plazas menor que cero", numPlazas >= 0);
+		checkNumPlazasNumPasajeros(numPlazas, numPasajeros);
+		Checkers.check("Vuelo::Numero de pasajeros menor que cero", numPasajeros >= 0);
+		Checkers.check("Vuelo::Duracion inferior a un minuto", duracion.toMinutes() >= 1);
+		checkTripulacion(tripulacion);
+		
+		
+		
+		this.trayecto = trayecto;
+		this.precio = precio;
+		this.numPasajeros = numPasajeros;
+		this.numPlazas = numPlazas;
+		this.codigo = codigo;
+		this.fecha = fecha;
+		this.duracion = duracion;
+		this.tripulacion = new ArrayList<>(tripulacion);
+	}
 
-   private void CheckPrecio(Double precio) {
-      if (precio < 0.0) {
-         throw new IllegalArgumentException("El precio no puede ser negativo");
-      }
-   }
+	private void checkTripulacion(List<String> tripulacion) {
+		Checkers.check("No hay más de 2 tripulantes", tripulacion.size() >= 3);
+		Checkers.check("Vuelo::Al menos un código de la tripulación no tiene el formato correcto",
+				Validators.sonCodigosTripulacionValidos(tripulacion));
+		Checkers.check("Vuelo::Composición tripulación no válida",
+				Validators.esComposicionTripulacionValida(tripulacion));
+	}
 
-   private void CheckNumPasajerosVSPlazas(Integer num_pasajeros, Integer num_plazas) {
-      if (num_pasajeros > num_plazas) {
-         throw new IllegalArgumentException("El numero de pasajeros no puede ser mayor al numero de plazas");
-      }
-   }
+	public Trayecto getTrayecto() {
+		return trayecto;
+	}
 
-   private void CheckCodigo(String codigo) {
-      if (codigo.length() != 6) {
-         throw new IllegalArgumentException("El codigo tiene que tener 6 caracteres");
-      } else if (!codigo.matches("[A-Z]{2}\\d{4}")) {
-         throw new IllegalArgumentException("El codigo de cada tripulante debe tener 2 mayusculas significativas seguido de 4 digitos");
-      }
-   }
+	public void setTrayecto(Trayecto trayecto) {
+		this.trayecto = trayecto;
+	}
 
-   private void CheckTripulacion(List<String> tripulacion) {
-      if (tripulacion.size() < 3) {
-         throw new IllegalArgumentException("El numero de tripulantes al menos deben ser 3 (un piloto, un copiloto y al menos un asistente)");
-      }
-      long pilotos = tripulacion.stream().filter(t -> t.startsWith("PP")).count();
-      long copilotos = tripulacion.stream().filter(t -> t.startsWith("CP")).count();
-      long asistentes = tripulacion.stream().filter(t -> t.startsWith("AV")).count();
+	public Double getPrecio() {
+		return precio;
+	}
 
-      if (pilotos != 1) {
-          throw new IllegalArgumentException("Debe haber exactamente un piloto.");
-      }
-      if (copilotos != 1) {
-          throw new IllegalArgumentException("Debe haber exactamente un copiloto.");
-      }
-      if (asistentes < 1) {
-          throw new IllegalArgumentException("Debe haber al menos un asistente.");
-      }
-   }
+	public void setPrecio(Double precio) {
+		Checkers.check("Vuelo::El precio no es mayor que cero", precio > 0);
+		this.precio = precio;
+	}
 
-   public Trayecto getTrayecto() {
-      return this.trayecto;
-   }
+	public Integer getNumPlazas() {
+		return numPlazas;
+	}
 
-   public void setTrayecto(Trayecto trayecto) {
-      this.trayecto = trayecto;
-   }
+	public void setNumPlazas(Integer numPlazas) {
+		Checkers.check("Vuelo::Numero de plazas menor que cero", numPlazas >= 0);
+		checkNumPlazasNumPasajeros(numPlazas, getNumPasajeros());
+		this.numPlazas = numPlazas;
+	}
 
-   public Double getPrecio() {
-      return this.precio;
-   }
+	private void checkNumPlazasNumPasajeros(Integer numPlazas, Integer numPasajeros) {
+		Checkers.check("Vuelo::Numero de plazas no es superior o igual al numero de pasajeros",
+				numPlazas >= numPasajeros);
+	}
 
-   public void setPrecio(Double precio) {
-      this.CheckPrecio(precio);
-      this.precio = precio;
-   }
+	public Integer getNumPasajeros() {
+		return numPasajeros;
+	}
 
-   public Integer getNum_pasajeros() {
-      return this.num_pasajeros;
-   }
+	public void setNumPasajeros(Integer numPasajeros) {
+		Checkers.check("Vuelo::Numero de pasajeros menor que cero", numPasajeros >= 0);
+		checkNumPlazasNumPasajeros(getNumPlazas(), numPasajeros);
+		this.numPasajeros = numPasajeros;
+	}
 
-   public void setNum_pasajeros(Integer num_pasajeros) {
-      this.CheckNumPasajeros(num_pasajeros);
-      this.num_pasajeros = num_pasajeros;
-   }
+	public String getCodigo() {
+		return codigo;
+	}
 
-   public Integer getNum_plazas() {
-      return this.num_plazas;
-   }
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
 
-   public void setNum_plazas(Integer num_plazas) {
-      this.CheckNumPlazas(num_plazas);
-      this.num_plazas = num_plazas;
-   }
+	public LocalDate getFecha() {
+		return fecha;
+	}
 
-   public String getCodigo() {
-      return this.codigo;
-   }
+	public void setFecha(LocalDate fecha) {
+		this.fecha = fecha;
+	}
 
-   public void setCodigo(String codigo) {
-      this.CheckCodigo(codigo);
-      this.codigo = codigo;
-   }
+	public Duration getDuracion() {
+		return duracion;
+	}
 
-   public LocalDate getFecha() {
-      return this.fecha;
-   }
+	public void setDuracion(Duration duracion) {
+		Checkers.check("Vuelo::Duracion inferior a un minuto", duracion.toMinutes() >= 1);
+		this.duracion = duracion;
+	}
 
-   public void setFecha(LocalDate fecha) {
-      this.fecha = fecha;
-   }
+	public List<String> getTripulacion() {
+		return new ArrayList<>(tripulacion);
+	}
 
-   public Duration getDuracion() {
-      return this.duracion;
-   }
+	// Propiedades derivadas
+	public String getOrigen() {
+		return trayecto.origen();
+	}
 
-   public void setDuracion(Duration duracion) {
-      this.duracion = duracion;
-   }
+	public String getDestino() {
+		return trayecto.destino();
+	}
 
-   public List<String> getTripulacion() {
-      return this.tripulacion;
-   }
+	public Long getDuracionMinutos() {
+		return duracion.toMinutes();
+	}
 
-   public void setTripulacion(List<String> tripulacion) {
-      this.CheckTripulacion(tripulacion);
-      this.tripulacion = tripulacion;
-   }
+	public Boolean estaCompleto() {
+		return getNumPlazas().equals(getNumPasajeros());
+	}
 
-   public Boolean getCompleto() {
-      return this.completo;
-   }
+	public Double getPorcentajeOcupacion() {
+		return getNumPasajeros() * 100. / getNumPlazas();
+	}
 
-   public void setCompleto(Boolean completo) {
-      this.completo = completo;
-   }
-   
-   public Double getPorcentaje() {
-	      return this.porcentaje;
-	   }
-
-	   public void setPorcentaje(Double porcentaje) {
-	      this.porcentaje = porcentaje;
-	   }
-   
-		@Override
+	@Override
 	public int hashCode() {
 		return Objects.hash(codigo, fecha);
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -179,22 +158,28 @@ public class Vuelo {
 		Vuelo other = (Vuelo) obj;
 		return Objects.equals(codigo, other.codigo) && Objects.equals(fecha, other.fecha);
 	}
-	
-	public int compareTo(Vuelo o) {
-		int r = this.fecha.compareTo(o.fecha);
-		if(r==0) {
-			r = this.codigo.compareTo(o.codigo);
+
+	public int compareTo(Vuelo v) {
+		int res = this.fecha.compareTo(v.getFecha());
+		if (res == 0) {
+			res = this.codigo.compareTo(v.getCodigo());
 		}
-		return r;
+		return res;
 	}
-	
-	private void incrementaPrecioPorcentaje(Double porcentaje) {
-		Double p = getPrecio();
-		setPrecio(p*porcentaje + p);
-	}
-	
-	@Override
+
 	public String toString() {
-		return "Vuelo [trayecto=" + trayecto + ", codigo=" + codigo + ", fecha=" + fecha + "]";
+		return "Vuelo [Trayecto=" + trayecto + ", codigo=" + codigo + ", fecha=" + fecha + "]";
 	}
+
+	//Otras operaciones
+	
+	/**
+	 * @param porcentaje Porcentaje de incremento del precio
+	 * Incrementa el precio del vuelo en el porcentaje dado como parámetro.
+	 */
+	public void incrementaPrecioPorcentaje(Double porcentaje) {
+		Double nuevoPrecio = getPrecio() * (1 + porcentaje / 100);
+		setPrecio(nuevoPrecio);
+	}
+
 }

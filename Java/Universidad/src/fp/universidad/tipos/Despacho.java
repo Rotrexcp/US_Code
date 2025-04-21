@@ -30,15 +30,7 @@ public class Despacho extends Espacio{
 	}
 	
 	public Despacho(String c) {
-		String [] trozos = c.split(",");
-		Checkers.check("cadena no trozeada", trozos.length==4);
-		String nombre = this.getNombre();
-		nombre = trozos[0].strip();
-		Integer planta = this.getPlanta();
-		planta = Integer.parseInt(trozos[1].strip());
-		Integer capacidad = this.getCapacidad();
-		capacidad = Integer.parseInt(trozos[2].strip());
-		this.profesores = null;
+		super(c);
 	}
 	
 	
